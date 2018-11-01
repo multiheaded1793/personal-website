@@ -1,0 +1,86 @@
+.mem-container {
+    font-family: 'Coda', cursive;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+.deck {
+    width: 60vw;
+    max-width: 530px;
+    height: 60vw;
+    max-height: 530px;
+    /* min-height: 580px; */
+    background: linear-gradient(160deg, #FF8E70 5%, #FFBD70 95%);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 10px 12px 15px 0 rgba(46, 61, 73, 0.5);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 1em;
+}
+
+.deck .card {
+    /* height: 100px;
+    width: 100px; */
+    height: 22%;
+    width: 22%;
+    background: #344444;
+    font-size: 0; /*this makes it invisible*/
+    color: #ffffff;
+    border-radius: 7px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: font-size 1s;
+    transition: background 1s;
+    box-shadow: 5px 2px 15px 0 rgba(46, 61, 73, 0.5);
+}
+
+.deck .card.open {
+    transform: rotateY(0);
+    background: #02b3e4;
+    cursor: default;
+}
+
+.deck .card.show {
+    font-size: 33px;
+}
+
+.deck .card.match {
+    cursor: default;
+    background: #02ccba;
+    font-size: 33px;
+}
+
+/*
+ * Styles for the Score Panel
+ */
+
+.score-panel {
+    text-align: left;
+    width: 50%;
+    margin-bottom: 10px;
+}
+
+.score-panel .stars {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    margin: 0 5px 0 0;
+}
+
+.score-panel .stars li {
+    list-style: none;
+    display: inline-block;
+}
+
+.score-panel #mem-restart {
+    float: right;
+    cursor: pointer;
+}

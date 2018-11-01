@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Website Title</title>
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet" type="text/css">
+  <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
+  <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+  <!-- <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-" crossorigin="anonymous"> -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/wikiparser.css">
+  <link rel="stylesheet" href="css/pixel-paint.css">
+  <link rel="stylesheet" href="css/mem.css">
+  <style class="dynamicStyle"></style>
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="js/plugins/mCustomScrollbar/jquery.mCustomScrollbar.css">
+  <link rel="stylesheet" href="js/plugins/OwlCarousel/dist/assets/owl.carousel.min.css" />
+  <link rel="stylesheet" href="js/plugins/OwlCarousel/dist/assets/owl.theme.default.css" />
+</head>
+<body>
+  <div class="structure">
+    <div class="sidebar" id="menu">
+      <div class="sidebar-background"></div>
+      <div class="menu-wrapper">
+        <ul class="section-heading">
+          <li class="link-p1 current" onclick="swapPage(1)"><a><span>Wikipedia parser</span></a></li>
+          <li class="link-p2" onclick="swapPage(2)"><a><span>Painting canvas</span></a></li>
+          <li class="link-p3" onclick="swapPage(3)"><a><span>Memory game</span></a></li>
+          <li class="link-p4" onclick="swapPage(4)"><a><span>About</span></a></li>
+        </ul>
+      </div>
+      <!-- <div class="sidebar-item">
+        <div class="sidebar-sample" id="s2">
+        </div>
+        <h4 class="sidebar-caption">
+          #f44336
+        </h4>
+      </div> -->
+    </div>
+    <div class="mainspace">
+      <header class="header">
+        <img class="header-logo" src="img/ef-logo3.png" alt="Logo">
+        <div class="header-text">
+          <h1 class="header-name">
+            Website Title
+          </h1>
+          <h2 class="header-title">Pretty Responsive Design
+          </h2>
+        </div>
+      </header>
+      <div class="separator" id="topSeparator">
+      </div>
+      <main>
+        <section class="parser-container showcase" id="page1">
+          <h2 class="section-heading">Wikipedia Parser</h2>
+          <div class="parser-layout">
+            <div id="wikiWidget">
+              <form id="searchByTitle" class="interface-element">
+                <h3>Search
+                  by title:</h3>
+                  <p><input type="text" id="pageSearchField" value="Madrid"></p>
+                  <p><input type="button" value="Search" id="searchButton" onclick="pageButton()"></p>
+                  <p><input type="checkbox" id="checkIntroOnly" checked>Introduction only</p>
+                </form>
+                <form class="interface-element">
+                  <h4>Random article
+                    from category:</h4>
+                    <p><input type="text" id="catSearchField" value="Cats"></p>
+                    <p>Recursion depth: <input type="number" id="recursionDepth" name="depth" min="1" max="8" value="2"></p>
+                    <!-- <p><input type="button" value="Random from category" id="catButton" onclick="" disabled></p> -->
+                    <p><input type="button" value="Preload category" id="debugPreloadCat" onclick="preloadButton()"></p>
+                    <p><input type="button" value="Random from preloaded" id="debugRandomPick" onclick="randomInCat()" disabled></p>
+                    <p>Subcategories preloaded: <span id="subcatsLoaded"></span></p>
+                    <p>Page titles fetched: <span id="titlesLoaded"></span></p>
+                    <p>Loading (S/T): <span id="loadingS">0</span> / <span id="loadingT">0</span></p>
+                  </form>
+                </div>
+                <div class="wiki-content-area mw-body">
+                  <h3 id="control-target-name">Wiki article</h3>
+                  <div lang="en" dir="ltr" class="mw-content-text mw-content-ltr"></div>
+                </div>
+              </div>
+            </section>
+            <section class="pixel-container showcase" id="page2">
+              <h2 class="section-heading">Pixel Art Maker</h2>
+              <div class="design-interface" id="canvasWidget">
+                <form class="interface-element">
+                  <h3>Choose grid size:</h3>
+                  <div id="sizePicker">
+                    <p>Grid height:
+                      <input type="number" id="inputHeight" name="height" min="1" max="50" value="5">
+                    </p>
+                    <p>Grid width:
+                      <input type="number" id="inputWidth" name="width" min="1" max="50" value="5">
+                    </p>
+                    <input type="button" id="inputSubmit" value="Create">
+                  </div>
+                </form>
+                <form class="interface-element">
+                  <p><h4>Pick a color:</h4>
+                    <input type="color" id="colorPicker" value="#000000">
+                  </p>
+                  <p><input type="button" id="inputRand" value="Random color">
+                    <input type="button" id="inputRandAll" value="Random fill">
+                  </p>
+                </form>
+              </div>
+              <div class="interface-element canvas-container">
+                <h3>Design Canvas</h3>
+                <table id="pixelCanvas"></table>
+              </div>
+            </section>
+            <section class="mem-container showcase" id="page3">
+              <h2 class="section-heading">Memory game</h2>
+              <section class="score-panel">
+                <ul class="stars">
+                  <li><i class="fa fa-star"></i></li>
+                  <li><i class="fa fa-star"></i></li>
+                  <li><i class="fa fa-star"></i></li>
+                </ul>
+                <span class="moves">0</span> Moves
+                <div id="mem-restart">
+                  <i class="fa fa-repeat"></i>
+                </div>
+              </section>
+              <ul class="deck" id="mem-deck-area">
+              </ul>
+            </section>
+            <section class="about-container showcase" id="page4">
+              <h2 class="section-heading">About me</h2>
+              <div class="about-txt">
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vestibulum morbi blandit cursus risus. Urna id volutpat lacus laoreet non curabitur gravida. Auctor urna nunc id cursus metus aliquam eleifend. Viverra ipsum nunc aliquet bibendum enim facilisis gravida neque. Sed felis eget velit aliquet sagittis id consectetur purus. Faucibus pulvinar elementum integer enim neque we live in a society.</p>
+              <p>Sit amet mattis vulputate enim. Massa id neque aliquam vestibulum. Sit amet justo donec enim. Faucibus interdum posuere lorem ipsum dolor sit amet. In fermentum posuere urna nec tincidunt praesent. Viverra tellus in hac habitasse platea. Pretium vulputate sapien nec sagittis aliquam malesuada bibendum arcu. Arcu ac tortor dignissim convallis aenean. Auctor urna nunc id cursus metus aliquam eleifend mi in. Dignissim convallis aenean et tortor at risus viverra. Nullam eget felis eget nunc lobortis mattis aliquam faucibus purus. Eget nullam non nisi est sit amet facilisis magna. Cras semper auctor neque vitae tempus quam bottom text.</p></div>
+              </section>
+            <section class="features">
+              <h4 class="section-heading">Random pretty pictures <span class="note" onclick="setCatImageUrl()">(randomize)</span></h4>
+              <div class="features-block">
+                <article class="feature-item" id ="i1">
+                  <img src="img/blank.png" class="cat-img" alt="Click me" onclick="setImgUrl(this)">
+                  <h3>Random photo</h3>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                </article>
+                <article class="feature-item" id ="i2">
+                  <img src="img/blank.png" class="cat-img" alt="Click me" onclick="setImgUrl(this)">
+                  <h3>Another photo</h3>
+                  <p>Duis aute irure dolor in reprehenderit in voluptate</p>
+                </article>
+                <article class="feature-item" id ="i3">
+                  <img src="img/blank.png" class="cat-img" alt="Click me" onclick="setImgUrl(this)">
+                  <h3>Yet another photo</h3>
+                  <p>Excepteur sint occaecat cupidatat non proident</p>
+                </article>
+              </div>
+            </section>
+            <div class="owl-wrapper">
+              <div class="owl-carousel owl-theme" id="owl_1">
+                <div class="owl-lazy item" src="" data-src="https://source.unsplash.com/random/330x220"></div>
+                <div class="owl-lazy item" src="" data-src="https://source.unsplash.com/random/299x200"></div>
+                <div class="owl-lazy item" src="" data-src="https://source.unsplash.com/random/300x199"></div>
+                <div class="owl-lazy item" src="" data-src="https://source.unsplash.com/random/300x201"></div>
+                <div class="owl-lazy item" src="" data-src="https://source.unsplash.com/random/302x200"></div>
+                <div class="owl-lazy item" src="" data-src="https://source.unsplash.com/random/300x202"></div>
+                <div class="owl-lazy item" src="" data-src="https://source.unsplash.com/random/299x198"></div>
+                <div class="owl-lazy item" src="" data-src="https://source.unsplash.com/random/333x222"></div>
+                <div class="owl-lazy item" src="" data-src="https://source.unsplash.com/random/336x224"></div>
+              </div>
+              <div class="owl-carousel owl-theme" id="owl_2">
+                <div class="owl-lazy item" src="" data-src="https://source.unsplash.com/random/303x201"></div>
+                <div class="owl-lazy item" src="" data-src="https://source.unsplash.com/random/312x209"></div>
+                <div class="owl-lazy item" src="" data-src="https://source.unsplash.com/random/299x199"></div>
+                <div class="owl-lazy item" src="" data-src="https://source.unsplash.com/random/306x204"></div>
+                <div class="owl-lazy item" src="" data-src="https://source.unsplash.com/random/309x206"></div>
+                <div class="owl-lazy item" src="" data-src="https://source.unsplash.com/random/318x212"></div>
+                <div class="owl-lazy item" src="" data-src="https://source.unsplash.com/random/315x210"></div>
+                <div class="owl-lazy item" src="" data-src="https://source.unsplash.com/random/321x214"></div>
+                <div class="owl-lazy item" src="" data-src="https://source.unsplash.com/random/324x216"></div>
+              </div>
+            </div>
+            <footer>
+              <ul>
+                <li><a href="https://source.unsplash.com/">Random photos taken from Unsplash</a></li>
+                <li><a>Contact me</a></li>
+                <li><a>RSS</a></li>
+              </ul>
+            </footer>
+          </main>
+        </div>
+      </div>
+      <script src="js/lib/jquery-3.3.1.min.js"></script>
+      <script src="js/lib/bootstrap.min.js"></script>
+      <script src="js\lib\greensock\TimelineMax.min.js"></script>
+      <script src="js\lib\greensock\TweenMax.min.js"></script>
+      <script src="js\lib\greensock\ScrollToPlugin.min.js"></script>
+      <script src="js\plugins\scrollmagic\uncompressed\ScrollMagic.js"></script>
+      <script src="js\plugins\scrollmagic\uncompressed\plugins\jquery.ScrollMagic.js"></script>
+      <script src="js\plugins\scrollmagic\uncompressed\plugins\animation.gsap.js"></script>
+      <script src="js\plugins\scrollmagic\uncompressed\plugins\debug.addIndicators.js"></script>
+      <script src="js/plugins/OwlCarousel/dist/owl.carousel.min.js"></script>
+      <script src="js/plugins/OwlCarousel/dist/owl.linked.js"></script>
+
+      <script src="js/main.js"></script>
+      <script src="https://malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+      <script src="js/myOwl.js"></script>
+      <script src="js/wikiparser.js"></script>
+      <script src="js/pixel-paint.js"></script>
+      <script src="js/mem.js"></script>
+    </body>
+    </html>

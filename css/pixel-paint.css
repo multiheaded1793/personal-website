@@ -1,0 +1,11 @@
+#canvasWidget {
+  width: 28%;
+  min-width: min-content;
+  margin: 0em;
+  padding: 8px 6px 8px;
+  background-color: #B0B9FF47;
+}
+
+.canvas-container {
+  min-width: 67%;
+}
