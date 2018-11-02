@@ -1,19 +1,39 @@
-function ajax_get(url, callback) {
-  var xmlhttp = new XMLHttpRequest();
-  xmlhttp.onreadystatechange = function() {
-    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-      console.log('responseText: ');
-      try {
-        var data = JSON.parse(xmlhttp.responseText);
-      } catch(err) {
-        console.log(err.message + " in " + xmlhttp.responseText);
-        return err.message;
+function ajax_get(url, callback=console.log, timeout=2000) {
+  return new Promise ((resolve, reject) => {
+    let xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        console.log('responseText: omitted');
+        console.log(url)
+        try {
+          let data = JSON.parse(xmlhttp.responseText);
+          resolve(data);
+        }
+        catch(err) {
+          console.log(err.message + " in " + xmlhttp.responseText);
+          reject(err.message);
+        }
+        // callback(data);
       }
-      callback(data);
-    }
-  };
-  xmlhttp.open("GET", url, true);
-  xmlhttp.send();
+    };
+    xmlhttp.onerror = function () {
+      console.log('ERR')
+      reject({
+        status: this.status,
+        statusText: xmlhttp.statusText
+      });
+    };
+    xmlhttp.ontimeout = function () {
+      console.error("The request for " + url + " timed out. "+this.status);
+      reject({
+        status: this.status,
+        statusText: xmlhttp.statusText
+      });
+    };
+    xmlhttp.open("GET", url, true);
+    xmlhttp.timeout = timeout;
+    xmlhttp.send(null);
+  })
 }
 
 function escapeRegExp(string) {
