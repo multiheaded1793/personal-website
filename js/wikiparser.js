@@ -5,11 +5,7 @@ const pageRequestOptions = 'action=parse&format=json&origin=*&prop=text|headhtml
 let wiki_url = '';
 let wikiCatPlain = '';
 let wikiEncode = function(e) {return encodeURIComponent(e);}
-let rawContent = '';
-let amended = '';
-let headInfo = '';
 let stylesheetElem = '';
-let phpStyleRequest = '';
 let catPageSet = new Set();
 let subcatSet = new Set();
 let maxSubcats = 1000;
@@ -30,16 +26,16 @@ async function getArticle (url) {
     let headInfo = (new DOMParser()).parseFromString(data.parse.headhtml["*"], 'text/html') ;
     stylesheetElem = headInfo.querySelectorAll('link[rel="stylesheet"]');
     for (style of stylesheetElem) { console.log('WSTYLE: https://en.m.wikipedia.org'+style.href) }
-    phpStyleRequest = "https://en.m.wikipedia.org/w/load.php?debug=yes&lang=en&modules=ext.cite.styles%7Cmediawiki.hlist%7Cmediawiki.ui.button%2Cicon%7Cskins.minerva.base.reset%2Cstyles%7Cskins.minerva.content.styles%7Cskins.minerva.content.styles.images%7Cskins.minerva.icons.images%7Cskins.minerva.tablet.styles&only=styles&skin=minerva";
-    ripStyle();
+    let phpStyleRequest = "https://en.m.wikipedia.org/w/load.php?debug=yes&lang=en&modules=ext.cite.styles%7Cmediawiki.hlist%7Cmediawiki.ui.button%2Cicon%7Cskins.minerva.base.reset%2Cstyles%7Cskins.minerva.content.styles%7Cskins.minerva.content.styles.images%7Cskins.minerva.icons.images%7Cskins.minerva.tablet.styles&only=styles&skin=minerva";
+    ripStyle(phpStyleRequest);
     resolve(data);
   });
   let insertContent = (data) =>  new Promise((resolve, reject) => {
-    rawContent = data.parse.text["*"];
-    amended = amendAll(rawContent);
+    let rawContent = data.parse.text["*"];
+    let amended = amendAll(rawContent);
     document.querySelector(".mw-content-text").innerHTML = amended;
     document.getElementById("control-target-name").innerHTML = data.parse.title;
-    // document.querySelectorAll(".wiki-content-area").classList.toggle("wiki-content-loaded");
+    // document.querySelectorAll(".wiki-content-area").classList.add("wiki-content-loaded");
     $(".mw-text-wrapper").mCustomScrollbar({
       live: true,
       theme: "minimal-dark",
@@ -48,7 +44,6 @@ async function getArticle (url) {
           if (window.innerWidth < 559) {
             $(".mw-text-wrapper").mCustomScrollbar("disable");
           }
-          // console.log("Scrollbars updated");
         }
       }
     });
@@ -179,26 +174,6 @@ let getPagesInCat = async function (currentCat, cont='') {
         return('')
       }
     })
-    //   ajax_get(cat_url, function(data) {
-    //     try {
-    //       for (member of data.query.categorymembers) {
-    //         if (!member.title.includes('List of'||'Template'||'Portal:') && !catPageSet.has(member.title)) {
-    //           catPageArray.push(member.title);
-    //           catPageSet.add(member.title);
-    //         }
-    //       };
-    //       offset = data.continue ? data.continue.cmcontinue : '';
-    //       document.getElementById('loadingT').innerHTML--;
-    //       resolve(offset)
-    //     }
-    //     catch(err) {
-    //       document.getElementById('loadingT').innerHTML--;
-    //       console.log("page list error" + err)
-    //       reject('')
-    //     }
-    //   }
-    // );
-
   };
 
   // await wait(75);
@@ -271,7 +246,7 @@ function randomInCat() {
 }
 
 //rips style from target php, then wraps it to only be used in the wiki content pane
-function ripStyle() {
+function ripStyle(phpStyleRequest) {
   $.get(phpStyleRequest, function(data, status) {
     console.log("Dynamic style: yes\nStatus: " + status);
   }, "text").then(data => document.querySelector('.dynamicStyle').innerHTML = wrapStyle(data));
