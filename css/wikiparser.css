@@ -23,6 +23,7 @@
   margin: 0em;
   padding: 8px 6px 8px;
   background-color: #B0B9FF47;
+  border-top: solid 3px #B0B9FF;
   /* background: linear-gradient(to right, rgba(53,75,243,0.9) 0%,rgba(131,146,255,0.77) 50%,rgba(154,166,255,0.7) 75%,rgba(176,185,255,0.7) 100%); */
   /* position: sticky;
   top: 2em; */
@@ -36,6 +37,7 @@
 
 .wiki-content-loaded {
   background-color: #B8E3FF3b;
+  border-top: solid 3px #B8E3FF;
 }
 
 .mw-text-wrapper {

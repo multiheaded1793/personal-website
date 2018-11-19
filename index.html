@@ -9,7 +9,6 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet" type="text/css">
   <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
   <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-  <!-- <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-" crossorigin="anonymous"> -->
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/wikiparser.css">
   <link rel="stylesheet" href="css/pixel-paint.css">
@@ -26,10 +25,11 @@
       <div class="sidebar-background"></div>
       <div class="menu-wrapper">
         <ul class="section-heading">
-          <li class="link-p1 current" onclick="swapPage(1)"><a><span>Wikipedia parser</span></a></li>
-          <li class="link-p2" onclick="swapPage(2)"><a><span>Painting canvas</span></a></li>
-          <li class="link-p3" onclick="swapPage(3)"><a><span>Memory game</span></a></li>
-          <li class="link-p4" onclick="swapPage(4)"><a><span>About</span></a></li>
+          <li class="link current" id="link-page1"><a><span>Wikipedia parser</span></a></li>
+          <li class="link" id="link-page2"><a><span>Painting canvas</span></a></li>
+          <li class="link" id="link-page3"><a><span>Memory game</span></a></li>
+          <li class="link" id="link-page5"><a><span>Reddit app</span></a></li>
+          <li class="link" id="link-page4"><a><span>About</span></a></li>
         </ul>
       </div>
       <!-- <div class="sidebar-item">
@@ -42,7 +42,7 @@
     </div>
     <div class="mainspace">
       <header class="header">
-        <img class="header-logo" src="img/ef-logo3.png" alt="Logo">
+        <img class="header-logo" src="./img/ef-logo3.png" alt="Logo">
         <div class="header-text">
           <h1 class="header-name">
             Website Title
@@ -62,7 +62,7 @@
                 <h3>Search
                   by title:</h3>
                   <p><input type="text" id="pageSearchField" value="Madrid"></p>
-                  <p><input type="button" value="Search" id="searchButton" onclick="pageButton()"></p>
+                  <p><input type="button" value="Search" id="searchButton"></p>
                   <p><input type="checkbox" id="checkIntroOnly" checked>Introduction only</p>
                 </form>
                 <form class="interface-element">
@@ -70,9 +70,9 @@
                     from category:</h4>
                     <p><input type="text" id="catSearchField" value="Cats"></p>
                     <p>Recursion depth: <input type="number" id="recursionDepth" name="depth" min="1" max="8" value="2"></p>
-                    <!-- <p><input type="button" value="Random from category" id="catButton" onclick="" disabled></p> -->
-                    <p><input type="button" value="Preload category" id="debugPreloadCat" onclick="preloadButton()"></p>
-                    <p><input type="button" value="Random from preloaded" id="debugRandomPick" onclick="randomInCat()" disabled></p>
+                    <!-- <p><input type="button" value="Random from category" id="catButton" disabled></p> -->
+                    <p><input type="button" value="Preload category" id="debugPreloadCat"></p>
+                    <p><input type="button" value="Random from preloaded" id="debugRandomPick" disabled></p>
                     <p>Subcategories preloaded: <span id="subcatsLoaded"></span></p>
                     <p>Page titles fetched: <span id="titlesLoaded"></span></p>
                     <p>Loading (S/T): <span id="loadingS">0</span> / <span id="loadingT">0</span></p>
@@ -133,23 +133,28 @@
               <h2 class="section-heading">About me</h2>
               <div class="about-txt">
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vestibulum morbi blandit cursus risus. Urna id volutpat lacus laoreet non curabitur gravida. Auctor urna nunc id cursus metus aliquam eleifend. Viverra ipsum nunc aliquet bibendum enim facilisis gravida neque. Sed felis eget velit aliquet sagittis id consectetur purus. Faucibus pulvinar elementum integer enim neque we live in a society.</p>
-              <p>Sit amet mattis vulputate enim. Massa id neque aliquam vestibulum. Sit amet justo donec enim. Faucibus interdum posuere lorem ipsum dolor sit amet. In fermentum posuere urna nec tincidunt praesent. Viverra tellus in hac habitasse platea. Pretium vulputate sapien nec sagittis aliquam malesuada bibendum arcu. Arcu ac tortor dignissim convallis aenean. Auctor urna nunc id cursus metus aliquam eleifend mi in. Dignissim convallis aenean et tortor at risus viverra. Nullam eget felis eget nunc lobortis mattis aliquam faucibus purus. Eget nullam non nisi est sit amet facilisis magna. Cras semper auctor neque vitae tempus quam bottom text.</p></div>
+              <p>Sit amet mattis vulputate enim. Massa id neque aliquam vestibulum. Sit amet justo donec enim. Faucibus interdum posuere lorem ipsum dolor sit amet. In fermentum posuere urna nec tincidunt praesent. Viverra tellus in hac habitasse platea. Pretium vulputate sapien nec sagittis aliquam malesuada bibendum arcu. Arcu ac tortor dignissim convallis aenean. Auctor urna nunc id cursus metus aliquam eleifend mi in. Dignissim convallis aenean et tortor at risus viverra. Nullam eget felis eget nunc lobortis mattis aliquam faucibus purus. Eget nullam non nisi est sit amet facilisis magna. Cras semper auctor neque vitae tempus quahttps://codepen.io/multiheaded1793/full/vpyGVB/m bottom text.</p>
+              <p><a href="https://codepen.io/multiheaded1793/full/vpyGVB/">Older project</a> (rework in progress)</p>
+            </div>
+              </section>
+              <section class="reddit-container showcase" id="page5">
+                Under construction
               </section>
             <section class="features">
               <h4 class="section-heading">Random pretty pictures <span class="note" onclick="setCatImageUrl()">(randomize)</span></h4>
               <div class="features-block">
                 <article class="feature-item" id ="i1">
-                  <img src="img/blank.png" class="cat-img" alt="Click me" onclick="setImgUrl(this)">
+                  <img src="./img/blank.png" class="cat-img" alt="Click me" onclick="setImgUrl(this)">
                   <h3>Random photo</h3>
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
                 </article>
                 <article class="feature-item" id ="i2">
-                  <img src="img/blank.png" class="cat-img" alt="Click me" onclick="setImgUrl(this)">
+                  <img src="./img/blank.png" class="cat-img" alt="Click me" onclick="setImgUrl(this)">
                   <h3>Another photo</h3>
                   <p>Duis aute irure dolor in reprehenderit in voluptate</p>
                 </article>
                 <article class="feature-item" id ="i3">
-                  <img src="img/blank.png" class="cat-img" alt="Click me" onclick="setImgUrl(this)">
+                  <img src="./img/blank.png" class="cat-img" alt="Click me" onclick="setImgUrl(this)">
                   <h3>Yet another photo</h3>
                   <p>Excepteur sint occaecat cupidatat non proident</p>
                 </article>
@@ -190,7 +195,7 @@
         </div>
       </div>
       <script src="js/lib/jquery-3.3.1.min.js"></script>
-      <script src="js/lib/bootstrap.min.js"></script>
+      <!-- <script src="./js/lib/bootstrap.min.js"></script> -->
       <script src="js\lib\greensock\TimelineMax.min.js"></script>
       <script src="js\lib\greensock\TweenMax.min.js"></script>
       <script src="js\lib\greensock\ScrollToPlugin.min.js"></script>
@@ -200,12 +205,12 @@
       <script src="js\plugins\scrollmagic\uncompressed\plugins\debug.addIndicators.js"></script>
       <script src="js/plugins/OwlCarousel/dist/owl.carousel.min.js"></script>
       <script src="js/plugins/OwlCarousel/dist/owl.linked.js"></script>
-
       <script src="js/main.js"></script>
       <script src="https://malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
       <script src="js/myOwl.js"></script>
       <script src="js/wikiparser.js"></script>
       <script src="js/pixel-paint.js"></script>
       <script src="js/mem.js"></script>
+      <!-- <script src="bundle.js"></script> -->
     </body>
     </html>

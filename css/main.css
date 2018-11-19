@@ -484,7 +484,13 @@ p {
   min-height: 125px;
   margin: 1.5vw 4vw;
   z-index: -1;
+  cursor: grab;
+  /* border-top: solid 1px #888; */
 }
+
+/* .owl-carousel:active {
+  cursor: grabbing;
+} */
 
 .owl-carousel .item {
   width: 180px;

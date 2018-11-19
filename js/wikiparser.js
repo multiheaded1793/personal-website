@@ -198,8 +198,9 @@ function pageButton() {
   let titleInput = document.getElementById('pageSearchField');
   wikiTarget = titleInput.value;
   setWikiPageUrl();
-  setTimeout(getArticle(wiki_url), 0);
+  getArticle(wiki_url);
 }
+document.getElementById('searchButton').addEventListener('click', pageButton, false);
 
 //preload, then choose at random
 async function randomButton() {
@@ -235,6 +236,7 @@ async function preloadButton() {
     document.getElementById('debugRandomPick').disabled = false;
   }
 }
+document.getElementById('debugPreloadCat').addEventListener('click', preloadButton, false);
 
 //random from the preloaded list above
 function randomInCat() {
@@ -244,6 +246,8 @@ function randomInCat() {
   setWikiPageUrl();
   getArticle(wiki_url);
 }
+
+document.getElementById('debugRandomPick').addEventListener('click', randomInCat, false);
 
 //rips style from target php, then wraps it to only be used in the wiki content pane
 function ripStyle(phpStyleRequest) {

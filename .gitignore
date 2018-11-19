@@ -1,1 +1,9 @@
-img/my-neighborhood.jpg
+img/*
+/node_modules
+gulpfile.js
+file.scss
+runlocalhost.bat
+reddit.js
+bundle.js
+package.json
+package-lock.json

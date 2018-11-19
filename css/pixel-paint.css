@@ -4,6 +4,7 @@
   margin: 0em;
   padding: 8px 6px 8px;
   background-color: #B0B9FF47;
+  border-top: solid 3px #B0B9FF;
 }
 
 .canvas-container {

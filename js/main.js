@@ -139,10 +139,11 @@ let items3d = new ScrollMagic.Scene({
 // $(document).ready(items3d.setTween(iTimeline));
 
 //switch to other page
-function swapPage(n, anim=true) {
+function swapPage(e, anim=true) {
+  let tid = e.currentTarget.getAttribute('id');
   let pages = document.querySelectorAll('.showcase')
   for (page of pages) {
-    if (page.id == `page${n}`) {
+    if (tid == `link-`+page.id) {
       page.style.opacity = "";
       page.style.height = "";
       page.style.position = "";
@@ -157,7 +158,7 @@ function swapPage(n, anim=true) {
   }
   let links = document.querySelectorAll('.menu-wrapper li')
   for (link of links) {
-    if (link.classList.contains(`link-p${n}`)) {
+    if (link.id == tid) {
       link.classList.add('current')
     }
     else {
@@ -178,6 +179,27 @@ function swapPage(n, anim=true) {
   }
 }
 
-$(document).ready(swapPage(1, false));
+//replace with proper function later, bad event listener hack for now
+for (link of document.querySelectorAll('.menu-wrapper li')) {
+  link.addEventListener('click', swapPage, false);
+}
+
+function simulateClick(t) {
+  let event = new MouseEvent('click', {
+    view: window,
+    bubbles: true,
+    cancelable: true
+  });
+  let p1 = document.getElementById(t);
+  p1.dispatchEvent(event);
+}
+
 $(document).ready(setCatImageUrl());
+$(document).ready(simulateClick('link-page1'));
 window.onload = items3d.setTween(iTimeline);
+
+// var snoowrap = require('snoowrap');
+// var sass = require('sass');
+// import './file.css'
+var test = {};
+let t = '';
