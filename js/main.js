@@ -79,7 +79,7 @@ let unsplashRnd = function() {
 
 //randomizes my 3 pics
 async function setCatImageUrl(pics=catPics) {
-  for await (pic of pics) {
+  for (pic of pics) {
     pic.setAttribute("src", await promiseUrl(unsplashRnd()));
     // console.log(pic.getAttribute("src"));
   }
